@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Bubbles iBeacon SDK Sample</string>
+
+    <string name="gcm_defaultSenderId" translatable="false"></string>
+    <string name="google_app_id" translatable="false"></string>
+
+    <string name="sdk_beacon_api_key" translatable="false"></string>
+
 </resources>

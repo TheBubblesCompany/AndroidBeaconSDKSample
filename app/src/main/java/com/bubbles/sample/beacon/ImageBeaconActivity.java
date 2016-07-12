@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-public class ImageActivity extends AppCompatActivity {
+public class ImageBeaconActivity extends AppCompatActivity {
 
     private static final String TYPE_URI = "URI";
     private static final String TYPE_WEBVIEW = "WVW";
@@ -34,7 +34,7 @@ public class ImageActivity extends AppCompatActivity {
 
             if (actionType != null && !actionType.isEmpty()) {
 
-                image.setOnClickListener(new View.OnClickListener() {
+                if (image != null) image.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
@@ -56,7 +56,7 @@ public class ImageActivity extends AppCompatActivity {
                             actionUrl = extras.getString("action_url");
 
                             if (actionUrl != null && !actionUrl.isEmpty()) {
-                                Intent intent = new Intent(ImageActivity.this, WebViewActivity.class);
+                                Intent intent = new Intent(ImageBeaconActivity.this, WebViewBeaconActivity.class);
                                 intent.putExtra("url", actionUrl);
                                 startActivity(intent);
                                 finish();
@@ -70,7 +70,7 @@ public class ImageActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(ImageActivity.this, MainActivity.class));
+        startActivity(new Intent(ImageBeaconActivity.this, MainActivity.class));
         super.onBackPressed();
     }
 }

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest
     package="com.bubbles.sample.beacon"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -20,15 +19,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ImageActivity"/>
-        <activity android:name=".WebViewActivity"/>
+        <activity android:name=".ImageBeaconActivity"/>
+        <activity android:name=".WebViewBeaconActivity"/>
+        <activity android:name=".UriBeaconActivity"/>
+        <activity android:name=".ServiceBeaconActivity"/>
 
         <!-- START Bubbles SDK -->
         <meta-data
-            android:name="com.bubbles.sdk.beacon.key"
-            android:value="48d3edf9d69061cb41c123be9097ddbc"/>
-        <activity android:name="com.bubbles.sdk.beacon.activity.BeaconActivity"/>
+            android:name="com.mybubbles.sdk.key"
+            android:value="@string/sdk_beacon_api_key"/>
         <!-- END Bubbles SDK -->
+
+
+        <!-- GCM -->
+        <service
+            android:name="com.bubbles.sample.beacon.GCMRegistrationIntentService"
+            android:exported="false"/>
 
     </application>
 </manifest>

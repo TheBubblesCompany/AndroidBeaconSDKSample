@@ -9,7 +9,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewBeaconActivity extends AppCompatActivity {
 
     private static final String BUBBLES_URL = "http://bubbles-company.com";
 
@@ -44,7 +44,7 @@ public class WebViewActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(WebViewActivity.this, MainActivity.class));
+        startActivity(new Intent(WebViewBeaconActivity.this, MainActivity.class));
         super.onBackPressed();
     }
 }
