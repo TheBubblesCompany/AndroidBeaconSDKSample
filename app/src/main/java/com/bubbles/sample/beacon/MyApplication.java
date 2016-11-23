@@ -17,7 +17,6 @@ import com.bubbles.sdk.beacon.BubblesException;
 import com.bubbles.sdk.beacon.BubblesInterface;
 
 import java.util.Date;
-import java.util.List;
 
 
 public class MyApplication extends Application {
@@ -34,91 +33,8 @@ public class MyApplication extends Application {
         }
 
         @Override
-        public void onBubbleFound(String _address) {
-            Log.e(TAG, "OnBubbleFound - The Bubble is : [" + _address + "]");
-        }
-
-        @Override
-        public void onBubbleDisappeared(String _address) {
-            Log.e(TAG, "OnBubbleDisappeared - The Bubble was : [" + _address + "]");
-        }
-
-        @Override
-        public void onGetCurrentBubbles(List<String> addresses) {
-            Log.e(TAG, "OnGetCurrentBubbles - Number of Bubbles : [" + addresses.size() + "]");
-        }
-
-        @Override
         public void onScanFinished() {
             Log.e(TAG, "Scan is finished.");
-        }
-
-        @Override
-        public void onChooseBubble(String address) {
-            Log.e(TAG, "OnChooseBubble - Address : [" + address + "]");
-        }
-
-        @Override
-        public void onReadOwnerName(String owner) {
-            Log.e(TAG, "OnReadOwnerName - Owner name : [" + owner + "]");
-        }
-
-        @Override
-        public void onWriteDate(long timestamp) {
-            Log.e(TAG, "OnWriteDate - The Date is : [" + new Date(timestamp).toString() + "] (" + timestamp + ")");
-        }
-
-        @Override
-        public void onReadDate(long timestamp) {
-            Log.e(TAG, "OnReadDate - The Date is : [" + new Date(timestamp).toString() + "] (" + timestamp + ")");
-        }
-
-        @Override
-        public void onWritePeriod() {
-            Log.e(TAG, "OnWritePeriod");
-        }
-
-        @Override
-        public void onWriteDefaultPeriod(String ret) {
-        }
-
-        @Override
-        public void onWritePeriodSchedule(String ret) {
-        }
-
-        @Override
-        public void onWriteStandardNotif() {
-        }
-
-        @Override
-        public void onValidateConfFile(String ret) {
-        }
-
-        @Override
-        public void onWriteOwnerName() {
-            Log.e(TAG, "OnWriteOwnerName");
-        }
-
-        @Override
-        public void onReadIfOwner(final boolean isOwner) {
-            Log.e(TAG, "OnReadIfOwner : [" + isOwner + "]");
-        }
-
-        @Override
-        public void onWriteIfNotif() {
-        }
-
-        @Override
-        public void onStatsScenario() {
-            Log.e(TAG, "onStatsScenario");
-        }
-
-        @Override
-        public void onFirmwareUpdateSuccess() {
-        }
-
-        @Override
-        public void onFirmwareUpdateErrors(int errorCount) {
         }
 
         @Override
