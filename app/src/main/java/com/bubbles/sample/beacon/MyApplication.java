@@ -6,7 +6,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
@@ -16,7 +15,8 @@ import com.bubbles.sdk.beacon.Bubbles;
 import com.bubbles.sdk.beacon.BubblesException;
 import com.bubbles.sdk.beacon.BubblesInterface;
 
-import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 
 public class MyApplication extends Application {
@@ -26,16 +26,6 @@ public class MyApplication extends Application {
     private Context that = this;
 
     private final BubblesInterface bubblesInterface = new BubblesInterface() {
-
-        @Override
-        public void onNetworkNotAvailable() {
-            Log.e(TAG, "OnNetworkNotAvailable");
-        }
-
-        @Override
-        public void onScanFinished() {
-            Log.e(TAG, "Scan is finished.");
-        }
 
         @Override
         public void onReceivedBeaconNotification(int id, String notifText, Intent intent) {
@@ -54,16 +44,10 @@ public class MyApplication extends Application {
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                     .setAutoCancel(true)
                     .setContentIntent(resultPendingIntent)
-                    // .setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + that.getPackageName() + "/raw/ctpn_perfect"))
                     .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE);
 
             NotificationManager notificationManager = (NotificationManager) that.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(id, builder.build());
-        }
-
-        @Override
-        public void onLocationChanged(Location currentLocation, Date lastUpdateTime) {
-            Log.e(TAG, "OnLocationChanged : " + currentLocation.getLatitude() + " " + currentLocation.getLongitude() + " " + lastUpdateTime.toString());
         }
 
         @Override
@@ -84,11 +68,6 @@ public class MyApplication extends Application {
         @Override
         public Class<?> getWebViewActivityClass() {
             return WebViewBeaconActivity.class;
-        }
-
-        @Override
-        public Class<?> getServiceActivityClass() {
-            return ServiceBeaconActivity.class;
         }
     };
 
@@ -115,7 +94,7 @@ public class MyApplication extends Application {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.e("APP", "registrationID : [" + Const.sharedPreferences.getString(Const.BSP_REGISTRATION_ID_STRING, null) + "]");
+                Log.e(TAG, "registrationID : [" + Const.sharedPreferences.getString(Const.BSP_REGISTRATION_ID_STRING, null) + "]");
                 final String registrationID = Const.sharedPreferences.getString(Const.BSP_REGISTRATION_ID_STRING, null);
                 if (registrationID != null) initBubblesSDK(registrationID);
                 else waitForRegistrationID();
@@ -123,11 +102,16 @@ public class MyApplication extends Application {
         }, 500);
     }
 
-    public void initBubblesSDK(String registrationID) {
+    public void initBubblesSDK(final String registrationID) {
+
+        final String userID = "YOUR_USER_ID";
+        final boolean forceForeground = false;
+        List<UUID> uuids = null;
+
         try {
-            if (Const.bubbles == null) Const.bubbles = Bubbles.getInstance(this, null, registrationID, false, null);
+            if (Const.bubbles == null) Const.bubbles = Bubbles.getInstance(this, userID, registrationID, forceForeground, uuids);
         } catch (BubblesException e) {
-            Log.e("APP", e.getMessage());
+            Log.e(TAG, e.getMessage());
         }
 
         if (Const.bubbles != null) Const.bubbles.setInterface(bubblesInterface);
