@@ -22,7 +22,6 @@
         <activity android:name=".ImageBeaconActivity"/>
         <activity android:name=".WebViewBeaconActivity"/>
         <activity android:name=".UriBeaconActivity"/>
-        <activity android:name=".ServiceBeaconActivity"/>
 
         <!-- START Bubbles SDK -->
         <meta-data
